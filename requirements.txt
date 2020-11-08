@@ -1,7 +1,7 @@
 pydantic~=1.7.2
 tensorflow~=2.3.1
 # numpy~=1.19.4
-numpy~==1.16.0
+numpy~=1.16.0
 pandas~=1.1.4
 # nltk~=3.5
 asyncpg~=0.21.0
