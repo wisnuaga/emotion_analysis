@@ -11,11 +11,6 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-### Running
-```bash
-python apps.py
-```
-
 ### Endpoint
 ```bash
 https://localhost:8001/emotion_analysis
