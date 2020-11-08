@@ -1,1 +1,1 @@
-web: uvicorn apps:app --workers 4 --reload
+web: uvicorn apps:app --reload
