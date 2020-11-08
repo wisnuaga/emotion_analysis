@@ -118,5 +118,5 @@ async def get_all_corpus():
     return response
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, log_level='info', workers=4)
+# if __name__ == "__main__":
+#     uvicorn.run(app, log_level='info', workers=4, reload=True)

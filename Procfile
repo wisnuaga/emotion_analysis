@@ -1,1 +1,1 @@
-web: python apps.py
+web: uvicorn apps:app --workers 4 --reload
