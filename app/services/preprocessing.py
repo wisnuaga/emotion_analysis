@@ -1,6 +1,6 @@
 # import nltk
 import pandas as pd
-from nltk.corpus import stopwords
+# from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 # nltk.download('stopwords')
@@ -17,7 +17,7 @@ class TextPreProcessing:
 
     def __init__(self):
         try:
-            self.STOP_WORD = set(stopwords.words('indonesian'))
+            # self.STOP_WORD = set(stopwords.words('indonesian'))
             self.NON_STEM = pd.read_csv('./machine_learning/assets/non-stem.txt', header=None)[0].values
             self.NOT_WORD = pd.read_csv('./machine_learning/assets/not-word.txt', header=None)[0].values
         except FileNotFoundError as err:
