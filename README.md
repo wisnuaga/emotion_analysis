@@ -9,21 +9,47 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 ```bash
 pip install -r requirements.txt
 ```
-
-## Usage
-### Endpoint
+Requirements.txt
 ```bash
-https://localhost:8001/emotion_analysis
+pydantic~=1.7.2
+tensorflow~=2.3.1
+numpy~=1.16.0
+pandas~=1.1.4
+psycopg2~=2.8.6
+asyncpg~=0.21.0
+fastapi~=0.61.2
+databases~=0.4.0
+SQLAlchemy~=1.3.20
+python-dotenv~=0.15.0
+uvicorn~=0.12.2
+PySastrawi~=1.2.0
+gunicorn~=20.0.4
+uvloop~=0.14.0
+httptools~=0.1.1
+```
+Running app
+```bash
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8001 apps:app --timeout 1800
 ```
 
-### Input
+## Usage
+Endpoint
+```text
+https://dominant-emotion-analysis.herokuapp.com/emotion_analysis
+```
+Request Method
+```text
+POST
+```
+
+JSON Input
 ```json
 {
     "text": "aku terkejut melihat kamarku berantakan"
 }
 ```
 
-### Output
+JSON Output
 ```json
 {
     "version": 0.1,
