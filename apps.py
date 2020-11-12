@@ -45,11 +45,15 @@ async def emotion_analysis(emotion_model: Emotion):
     # response template initialize
     response = {
         'version': 0.1,
-        'expressions': '',
         'status': status.HTTP_500_INTERNAL_SERVER_ERROR,
         'message': 'Internal server error.',
         'text': None
     }
+
+    if len(text) < 1:
+        response['status'] = status.HTTP_422_UNPROCESSABLE_ENTITY
+        response['message'] = 'Unprocessable Entity | Text can\'t be empty'
+        return response
 
     try:
         predict_emotion = emotion_controller.predict([text])
@@ -68,7 +72,7 @@ async def emotion_analysis(emotion_model: Emotion):
         # Success response
         response['expressions'] = predict_emotion
         response['message'] = 'success'
-        response['status'] = status.HTTP_201_CREATED
+        response['status'] = status.HTTP_200_OK
         response['text'] = text
 
         # Add Elapsed time
