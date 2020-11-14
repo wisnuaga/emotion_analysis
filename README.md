@@ -33,7 +33,7 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8001 apps:app --ti
 ```
 
 ## Usage
-Endpoint
+##### Endpoint LSTM model
 ```text
 https://dominant-emotion-analysis.herokuapp.com/emotion_analysis
 ```
@@ -86,10 +86,95 @@ JSON Output
 }
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+##### Endpoint Multinomial Naive Bayes with Persamaan Batas Dominan model
+```text
+https://dominant-emotion-analysis.herokuapp.com/emotion_analysis
+```
+Request Method
+```text
+POST
+```
 
-Please make sure to update tests as appropriate.
+JSON Input
+```json
+{
+    "text": "aku terkejut melihat kamarku berantakan"
+}
+```
+
+JSON Output
+```json
+{
+    "version": 0.1,
+    "status": 200,
+    "message": "success",
+    "text": "bangsat kamu kurang ajar",
+    "expressions": [
+        {
+            "tag": "MARAH",
+            "score": 0.38449304073161356
+        },
+        {
+            "tag": "JIJIK",
+            "score": 0.10118560415607536
+        },
+        {
+            "tag": "TAKUT",
+            "score": 0.1038166002029496
+        },
+        {
+            "tag": "SENANG",
+            "score": 0.1017323574239034
+        },
+        {
+            "tag": "SEDIH",
+            "score": 0.20164869680214054
+        },
+        {
+            "tag": "KAGET",
+            "score": 0.10712370068331822
+        }
+    ],
+    "dominant_threshold": 0.13118560415607536,
+    "dominant_emotion": [
+        {
+            "tag": "MARAH",
+            "score": 0.38449304073161356
+        },
+        {
+            "tag": "SEDIH",
+            "score": 0.20164869680214054
+        }
+    ],
+    "dominant_emotion_percentage": [
+        {
+            "tag": "MARAH",
+            "score": 0.6559728067641178
+        },
+        {
+            "tag": "SEDIH",
+            "score": 0.34402719323588216
+        }
+    ],
+    "dominant_emotion_softmax": [
+        {
+            "tag": "MARAH",
+            "score": 0.5455841590167495
+        },
+        {
+            "tag": "SEDIH",
+            "score": 0.4544158409832505
+        }
+    ],
+    "processing_time": 0.021436214447021484
+}
+```
+
+## Authors
+```
+Wisnu Agastya
+wisnu.aga@gmail.com
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

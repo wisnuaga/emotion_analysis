@@ -36,6 +36,27 @@ class EmotionAnalysisMNB:
             dominant_emotion_softmax = {k: self.util.softmax(v, list(dominant_emotion.values()))
                                         for k, v in dominant_emotion.items()}
 
+            result_dom_emotion = [
+                {
+                    'tag': label,
+                    'score': score
+                } for label, score in dominant_emotion.items()
+            ]
+
+            result_dom_emotion_percent = [
+                {
+                    'tag': label,
+                    'score': score
+                } for label, score in dominant_emotion_percentage.items()
+            ]
+
+            result_dom_emotion_softmax = [
+                {
+                    'tag': label,
+                    'score': score
+                } for label, score in dominant_emotion_softmax.items()
+            ]
+
             # convert result => {label: value}
             result = [
                 {
@@ -44,7 +65,7 @@ class EmotionAnalysisMNB:
                 } for idx, label in enumerate(self.util.labels)
             ]
 
-            return result, threshold, dominant_emotion, dominant_emotion_percentage, dominant_emotion_softmax
+            return result, threshold, result_dom_emotion, result_dom_emotion_percent, result_dom_emotion_softmax
         except Exception as e:
             print('Error:', e)
             raise e
