@@ -12,9 +12,9 @@ class MnbModel:
         tfidf_data = self.tokenizer.transform(data)
         return self.classifier.predict_proba(tfidf_data)
 
-    def PBD(self, probs, betha=0.03):
+    def PBD(self, probs, beta=0.03):
         min_prob = min(probs)
-        return min_prob + betha
+        return min_prob + beta
 
     def softmax(self, curr_prob, probs):
         return np.exp(curr_prob) / np.sum(np.exp(probs))

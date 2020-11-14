@@ -1,6 +1,5 @@
 from app.services.preprocessing import TextPreProcessing
 from app.services.mnb_model import MnbModel
-import sklearn
 
 
 class EmotionAnalysisMNB:
@@ -8,7 +7,7 @@ class EmotionAnalysisMNB:
         self.text_preprocessing = TextPreProcessing()
         self.util = MnbModel()
 
-    def predict(self, data):
+    def predict(self, data, beta=0.03):
         try:
             # text pre-processing
             data = [self.text_preprocessing.process(x) for x in data]
@@ -17,7 +16,7 @@ class EmotionAnalysisMNB:
             probs = self.util.model_predict(data)[0]
 
             # initialize dominant threshold
-            threshold = self.util.PBD(probs, 0.03)
+            threshold = self.util.PBD(probs, beta)
 
             # initialize emotion -> value
             emotion_values = {self.util.labels[i]: v for i, v in enumerate(probs)}

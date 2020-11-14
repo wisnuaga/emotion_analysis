@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.controllers.emotion import EmotionAnalysis
 from app.controllers.emotion_mnb import EmotionAnalysisMNB
 from app.models.emotion import Emotion
+from app.models.emotion_dominant import EmotionDominant
 from app.models.corpus import Corpus
 from database.database_config import database, corpus_schema
 from config.config import Config
@@ -88,12 +89,13 @@ async def emotion_analysis(emotion_model: Emotion):
 
 
 @app.post('/emotion_analysis_mnb')
-async def emotion_analysis(emotion_model: Emotion):
+async def emotion_analysis_mnb(emotion_model: EmotionDominant):
     # start timer
     s_time = time.time()
 
     # retrieve data from request
     text = emotion_model.text
+    beta = emotion_model.beta
 
     # response template initialize
     response = {
@@ -109,7 +111,8 @@ async def emotion_analysis(emotion_model: Emotion):
         return response
 
     try:
-        predict_emotion, threshold, d_emotion, d_emotion_per, d_emotion_soft = emotion_controller_mnb.predict([text])
+        predict_emotion, threshold, d_emotion, d_emotion_per, d_emotion_soft \
+            = emotion_controller_mnb.predict([text], beta)
 
         query = corpus_schema.insert().values(
             text=text,
@@ -127,7 +130,10 @@ async def emotion_analysis(emotion_model: Emotion):
         response['message'] = 'success'
         response['status'] = status.HTTP_200_OK
         response['text'] = text
-        response['dominant_threshold'] = threshold
+        response['dominant_threshold'] = {
+            'score': threshold,
+            'beta': beta
+        }
         response['dominant_emotion'] = d_emotion
         response['dominant_emotion_percentage'] = d_emotion_per
         response['dominant_emotion_softmax'] = d_emotion_soft
@@ -177,7 +183,6 @@ async def get_all_corpus():
         response['message'] = 'Internal server error | {}'.format(e)
 
     return response
-
 
 # if __name__ == "__main__":
 #     uvicorn.run(app, log_level='info', workers=4, reload=True)

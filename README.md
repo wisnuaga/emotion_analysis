@@ -98,7 +98,8 @@ POST
 JSON Input
 ```json
 {
-    "text": "aku terkejut melihat kamarku berantakan"
+    "text": "bangsat kamu kurang ajar",
+    "beta": 0.03
 }
 ```
 
@@ -135,7 +136,10 @@ JSON Output
             "score": 0.10712370068331822
         }
     ],
-    "dominant_threshold": 0.13118560415607536,
+    "dominant_threshold": {
+        "score": 0.13118560415607536,
+        "beta": 0.03
+    },
     "dominant_emotion": [
         {
             "tag": "MARAH",
@@ -166,7 +170,7 @@ JSON Output
             "score": 0.4544158409832505
         }
     ],
-    "processing_time": 0.021436214447021484
+    "processing_time": 0.024735689163208008
 }
 ```
 
