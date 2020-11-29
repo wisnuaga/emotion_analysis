@@ -5,8 +5,8 @@ import numpy as np
 class MnbModel:
     def __init__(self):
         self.labels = ['MARAH', 'JIJIK', 'TAKUT', 'SENANG', 'SEDIH', 'KAGET']
-        self.tokenizer = pickle.load(open('./machine_learning/models/vectorizer_mnb_v_2_0.model', 'rb'))
-        self.classifier = pickle.load(open('./machine_learning/models/classifier_mnb_v_2_0.model', 'rb'))
+        self.tokenizer = pickle.load(open('./machine_learning/models/vectorizer_mnb_v_2_1.model', 'rb'))
+        self.classifier = pickle.load(open('./machine_learning/models/classifier_mnb_v_2_1.model', 'rb'))
 
     def model_predict(self, data):
         tfidf_data = self.tokenizer.transform(data)

@@ -35,54 +35,47 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8001 apps:app --ti
 ## Usage
 ##### Endpoint LSTM model
 ```text
-https://dominant-emotion-analysis.herokuapp.com/emotion_analysis
+https://dominant-emotion-analysis.herokuapp.com/emotion_analysis?text=Cobalah mengerti kemarahan ayah kita
 ```
 Request Method
 ```text
-POST
-```
-
-JSON Input
-```json
-{
-    "text": "aku terkejut melihat kamarku berantakan"
-}
+GET
 ```
 
 JSON Output
 ```json
 {
     "version": 0.1,
+    "status": 200,
+    "message": "success",
+    "text": "Cobalah mengerti kemarahan ayah kita",
     "expressions": [
         {
             "tag": "MARAH",
-            "score": 0.0574
+            "score": 0.1106
         },
         {
             "tag": "JIJIK",
-            "score": 0.0009
+            "score": 0.0
         },
         {
             "tag": "TAKUT",
-            "score": 0.0003
-        },
-        {
-            "tag": "SENANG",
-            "score": 0.0013
-        },
-        {
-            "tag": "SEDIH",
             "score": 0.0002
         },
         {
+            "tag": "SENANG",
+            "score": 0.0
+        },
+        {
+            "tag": "SEDIH",
+            "score": 0.9208
+        },
+        {
             "tag": "KAGET",
-            "score": 0.7954
+            "score": 0.0
         }
     ],
-    "status": 201,
-    "message": "success",
-    "text": "aku terkejut melihat kamarku berantakan",
-    "processing_time": 1.364778757095337
+    "processing_time": 1.5899462699890137
 }
 ```
 

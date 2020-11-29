@@ -37,13 +37,13 @@ async def shutdown():
     await database.disconnect()
 
 
-@app.post('/emotion_analysis')
-async def emotion_analysis(emotion_model: Emotion):
+@app.get('/emotion_analysis')
+async def emotion_analysis(text: str):
     # start timer
     s_time = time.time()
 
-    # retrieve data from request
-    text = emotion_model.text
+    # # retrieve data from request
+    # text = text
 
     # response template initialize
     response = {
